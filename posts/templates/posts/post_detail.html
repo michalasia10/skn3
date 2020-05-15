@@ -1,0 +1,30 @@
+{% extends 'posts/post_base.html' %}
+{% load blog_tags %}
+{% block post %}
+    <div class="col-md-8">
+        <h1>{{ post.title }}</h1>
+    <div class="post-meta">
+        <span class="d-block"><a href="#">Autor: {{ post.author }}</a></span>
+        <span class="date-read">{{ post.publish}}<span class="mx-1">&bullet;</span>{% if post.body|length > 750 %}
+                10 min czytania
+            {% else %}
+                3 min czytania
+            {% endif %} <span class="icon-star2"></span></span>
+    </div>
+<p class="mb-3">{{ post.body|markdown }}</p>
+    </div>
+    {% if similar_posts %}
+
+    {% endif %}
+    <div class="col-md-8">
+    <h2>Podobne posty</h2>
+    {% for similar in similar_posts %}
+        <p class="mb-3">
+            <a href="{{ similar.get_absolute_url }}">{{ similar.title }}</a>
+        </p>
+        {% empty %}
+        <p>Nie ma podobnych postów.</p>
+    {% endfor %}
+    </div>
+
+{% endblock %}

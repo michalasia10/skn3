@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="posts-page">
+        <div class="container">
+            <div class="row">
+                {% block post_content %}{% endblock %}
+                {% block post %}{% endblock %}
+                {% block post_post %}{% endblock %}
+                {% block home %}{% endblock %}
+                {% block search %}{% endblock %}
+                {% block projects_content %}{% endblock %}
+                {% block about %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

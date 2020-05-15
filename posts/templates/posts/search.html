@@ -1,0 +1,15 @@
+{% extends 'posts/post_base.html' %}
+{% block search %}
+    {% if results  %}
+        <h1>Posty zawierające "{{ request.GET.q }}"</h1>
+{#        <h3>Znaleziono {{ total_results }} wynik {{ total_results|pluralize:'i' }}</h3>#}
+        {% for result in results %}
+            {% with post=result %}
+                <h4><a href="{{ post.get_absolute_url }}">{{ post.title}}</a></h4>
+                {{ post.body|truncatewords:30 }}
+            {% endwith %}
+        {% endfor %}
+        {% else %}
+        <h1>Brak wyników dla "{{ request.GET.q }}"</h1>
+{% endif %}
+{% endblock %}

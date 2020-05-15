@@ -1,0 +1,14 @@
+{% extends 'posts/post_base.html' %}
+
+{% block post_content %}
+    <div class="col-md-8">
+    {% if tag %}
+        <h2>Posty dla tagu #{{ tag.name }}</h2>
+    {% endif %}
+    {% for post in posts %}
+        {% include 'posts/_post.html' %}
+    {% endfor %}
+    {% include 'posts/paginator.html' with page=posts %}
+    </div>
+
+{% endblock %}
