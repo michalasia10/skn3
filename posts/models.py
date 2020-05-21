@@ -41,6 +41,8 @@ class Post(models.Model):
             self.publish.strftime('%m'),
             self.publish.strftime('%d'),
             self.slug])
-
+class Gallery(models.Model):
+    name = models.CharField(max_length=250 , null=True)
+    gallery_img = models.ImageField()
 
 

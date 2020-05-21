@@ -13,10 +13,6 @@ def post_list(request,tag_slug = None):
     paginator = Paginator(object,3)
     page = request.GET.get('page')
     tag = None
-    # search_term = ''
-    # if 'search' in request.GET:
-    #     search_term = request.GET["search"]
-    #     object = object.filter(title__icontains=search_term)
     if tag_slug:
         tag = get_object_or_404(Tag,slug=tag_slug)
         object = object.filter(tags__in=[tag])
@@ -48,8 +44,8 @@ def post_detail(request,year,month,day,post):
 def post_home(request):
     posts = Post.published.all()
     return render(request,'posts/actual.html',{'posts': posts})
-"""Działa """
 
+"""Wyszukiwanie postów"""
 def post_search(request):
     if request.method == 'GET':
         query = request.GET.get('q')
@@ -96,19 +92,11 @@ def project_list(request,tag_slug = None):
 
 def about_list(request,tag_slug = None):
     posts = Post.about.order_by('-publish')[:1]
-    # paginator = Paginator(object,3)
-    # page = request.GET.get('page')
     tag = None
     if tag_slug:
         tag = get_object_or_404(Tag,slug=tag_slug)
         posts = posts.filter(tags__in=[tag])
-    # try:
-    #     posts = paginator.page(page)
-    # except PageNotAnInteger:
-    # #     Jeśli zmienna page nie jest liczba całkowitą pobierana jest pierwsza strona wyników
-    #     posts = paginator.page(1)
-    # except EmptyPage:
-    # #     Jeśli zmienna page ma wartość wieksza niz numer ostatniej strony wwtedy pobierana jest ostatnia strone
-    #     posts = paginator.page(paginator.num_pages)
     return render(request,'posts/about.html',{'posts':posts,
                                                 'tag':tag,})
+def contact(request):
+    return render(request, 'posts/contact.html')
