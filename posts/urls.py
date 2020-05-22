@@ -11,5 +11,6 @@ urlpatterns = [
     path('search/',views.post_search , name = 'post_search'),
     path('projects/',views.project_list , name = 'projects_list'),
     path('about/',views.about_list , name = 'about'),
-    path('contact/',views.contact, name = 'contact')
+    path('contact/',views.contact, name = 'contact'),
+    path('add_galery/',views.add_gallery, name = 'add_photo'),
 ]

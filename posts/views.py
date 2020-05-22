@@ -1,12 +1,16 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,HttpResponseRedirect
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
-from .models import Post
+from django.template import RequestContext
+from .models import Post,Gallery
 from taggit.models import Tag
 from django.db.models import Count
 from django.contrib.postgres.search import TrigramSimilarity,SearchVector,SearchQuery,SearchRank
 from django.views.generic import ListView
 from django.db.models import Q
-# from .forms import SerachForm
+from django.views.generic.edit import FormView
+from django.forms import modelformset_factory
+from .forms import ImageForm,ModelPost
+from django.contrib import messages
 """POST LIST ZWRACA GRUPĘ/LISTE POSTÓW"""
 def post_list(request,tag_slug = None):
     object = Post.published.all()
@@ -100,3 +104,32 @@ def about_list(request,tag_slug = None):
                                                 'tag':tag,})
 def contact(request):
     return render(request, 'posts/contact.html')
+
+
+def add_gallery(request):
+
+    ImageFormSet = modelformset_factory(Gallery,
+                                        form=ImageForm, extra=3)
+
+    if request.method == 'POST':
+
+        postForm = ModelPost(request.POST)
+        formset = ImageFormSet(request.POST, request.FILES,
+                               queryset=Gallery.objects.none())
+
+
+        if postForm.is_valid() and formset.is_valid():
+            post_form = postForm.save(commit=False)
+            post_form.user = request.user
+            post_form.save()
+
+            for form in formset.cleaned_data:
+                image = form['image']
+                photo = Gallery(post=post_form, image=image)
+                photo.save()
+            messages.success(request,"Posted!")
+    else:
+        postForm = ModelPost()
+        formset = ImageFormSet(queryset=Gallery.objects.none())
+    return render(request, 'posts/add_image.html',
+                  {'postForm': postForm, 'formset': formset,})

@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 from .models import Post,Gallery
 from django import forms
 class ModelPost:
@@ -10,10 +11,8 @@ class ModelPost:
             'tags',
         ]
 
-class GalleryForm:
+class ImageForm(forms.ModelForm):
+    image = forms.ImageField(label='Image')
     class Meta:
         model = Gallery
-        fields = [
-            'name',
-            'gallery_img',
-        ]
+        fields = ('image', )

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post,Gallery
 # Register your models here.
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -10,3 +10,4 @@ class PostAdmin(admin.ModelAdmin):
     raw_id_fields = ('author',)
     ordering = ('publish',)
 admin.register(PostAdmin)
+admin.site.register(Gallery)

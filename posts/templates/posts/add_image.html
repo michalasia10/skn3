@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<form id="post_form" method="post" action="" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    {{ postForm.as_p }}
+    {{ formset.as_table }}
+    <input type="submit" name="submit" value="Submit" />
+</form>
+{% endblock %}
