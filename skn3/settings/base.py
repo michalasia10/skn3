@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5nv1fu^^7b)-3h1_*spq-772tevpf#mkr($p6f6x&sv$!oa-c3'
+
+SECRET_KEY = '-6u6_5n$^*h90n_x9xeqxp+=28+74=8x3$)$7c0=1*e_$vj4xq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -76,7 +78,9 @@ ROOT_URLCONF = 'skn3.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [
+            os.path.join(BASE_DIR,'templates'),
+            os.path.join(BASE_DIR, '../../templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -89,7 +93,7 @@ TEMPLATES = [
         },
     },
 ]
-
+TEMPLATE_DIRS = ('../../templates',)
 WSGI_APPLICATION = 'skn3.wsgi.application'
 
 
@@ -143,13 +147,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, '../../static')
 STATIC_URL = '/static/'
 # STATICFILES_DIRS = (
 #      os.path.join(BASE_DIR, 'static'),
 # )
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../../media')
 LOGIN_REDIRECT_URL = "/"
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+try:
+  from .local import *
+except ImportError:
+  pass

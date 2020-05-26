@@ -123,4 +123,3 @@ def add_gallery(request):
         form = Filles()
     return render(request, 'posts/add_image.html',
                   {'form': form,})
-                   # 'file_form': file_form,})
