@@ -25,14 +25,12 @@ class Post(models.Model):
     STATUS_CHOICES = (('draft', 'Draft'), ('published', 'Published'), ('projects', 'Projects'), ('about', 'About'))
     title = models.CharField(max_length=250, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    # created_at = models.DateTimeField(auto_now=True)
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     objects = models.Manager()
     published = PublishManager()
     projects = ProjectManager()
     about = AboutManager()
-    # objects = models.Manager()
     created = models.DateTimeField(auto_now=True)
     tags = TaggableManager(blank=True)
     slug = models.SlugField(unique_for_date='publish', max_length=250)
@@ -52,5 +50,19 @@ class Post(models.Model):
             self.slug])
 
 class Gallery(models.Model):
-    title = models.CharField(max_length=256, default="Zdjęcia z Obozu 2019")
+    title = models.CharField(max_length=256,null=True)
     file = models.FileField(upload_to="files/%Y/%m/%d")
+    publish = models.DateTimeField(default=timezone.now)
+    slug = models.SlugField(unique_for_date='publish', max_length=250)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('posts:gallery_detail', args=[
+            self.publish.year,
+            self.publish.strftime('%m'),
+            self.publish.strftime('%d'),
+            self.slug])
+
+

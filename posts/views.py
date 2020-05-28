@@ -123,3 +123,14 @@ def add_gallery(request):
         form = Filles()
     return render(request, 'posts/add_image.html',
                   {'form': form,})
+
+def gallery_list(request):
+    image = Gallery.objects.all()
+    return render(request,'posts/gallery.html',{'image':image})
+
+def gallery_detail(request,year,month,day,image):
+    images = get_object_or_404(Gallery.objects.filter(),slug = image,
+                               publish__year=year,
+                               publish__month=month,
+                             publish__day=day,)
+    return render(request,'posts/gallery_detail.html',{'images': images})
