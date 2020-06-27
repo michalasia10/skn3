@@ -1,1 +1,1 @@
-web: gunicorn skn3.wsgi --log-file - 
+web: gunicorn --log-file=- skn3.wsgi:application 
