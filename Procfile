@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath skn3 wsgi
+gunicorn skn3.wsgi:application --preload --workers 1
