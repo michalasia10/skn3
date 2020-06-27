@@ -1,7 +1,1 @@
-*.log
-*.pot
-*.pyc
-__pycache__/
-local.py
 db.sqlite3
-venv/
