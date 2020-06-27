@@ -1,1 +1,1 @@
-gunicorn skn3.wsgi:application --preload --workers 1
+web: gunicorn project.wsgi:application --log-file - --log-level debug
