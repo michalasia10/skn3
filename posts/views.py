@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.views.generic.edit import FormView
 from django.forms import modelformset_factory
 from .forms import Filles,ModelPost
-from django.contrib import messages
+from django.core.exceptions import MultipleObjectsReturned
 """POST LIST ZWRACA GRUPĘ/LISTE POSTÓW"""
 def post_list(request,tag_slug = None):
     object = Post.published.all()
@@ -105,22 +105,55 @@ def contact(request):
     return render(request, 'posts/contact.html')
 
 
-def add_gallery(request):
-    if request.method == 'POST':
-        # form = ModelPost(request.POST)
-        form = Filles(request.POST, request.FILES)
-        files = request.FILES.getlist('file')  # field name in model
-        if form.is_valid():
-            feed_instance = form.save(commit=False)
-            # feed_instance.user = user
-            feed_instance.save()
-            for f in files:
-                file_instance = Gallery(file=f,)
-                file_instance.save()
-                return HttpResponseRedirect('/posts')
-    else:
-        # form = ModelPost()
-        form = Filles()
-    return render(request, 'posts/add_image.html',
-                  {'form': form,})
-                   # 'file_form': file_form,})
+# def add_gallery(request):
+#     if request.method == 'POST':
+#         # form = ModelPost(request.POST)
+#         form = Filles(request.POST, request.FILES)
+#         files = request.FILES.getlist('file')  # field name in model
+#         if form.is_valid():
+#             feed_instance = form.save(commit=False)
+#             # feed_instance.user = user
+#             feed_instance.save()
+#             for f in files:
+#                 file_instance = Gallery(file=f,)
+#                 file_instance.save()
+#                 return HttpResponseRedirect('/posts')
+#     else:
+#         # form = ModelPost()
+#         form = Filles()
+#     return render(request, 'posts/add_image.html',
+#                   {'form': form,})
+#
+# def gallery_list(request):
+#     image = Gallery.objects.all()
+#     return render(request,'posts/gallery.html',{'image':image})
+#
+# def gallery_detail(request,year,month,day,image):
+#     # images = Gallery.objects.filter()
+#     images = get_object_or_404(Gallery.objects.filter(),
+#                                publish__year=year,
+#                                publish__month=month,
+#                              publish__day=day,
+#                                slug = image,)
+#     return render(request,'posts/gallery_detail.html',{'images': images})
+
+
+def edit(request):
+     submitted = False
+     if request.method == 'POST':
+         form = ModelPost(request.POST)
+         if form.is_valid():
+             cd = form.cleaned_data
+             form.save()
+             # assert False
+             return HttpResponseRedirect('/posts/edit?submitted=True')
+     else:
+         form = ModelPost()
+         if 'submitted' in request.GET:
+             submitted = True
+
+     return render(request,
+         'posts/edit_actual.html',
+         {'form': form, 'submitted': submitted}
+       )
+

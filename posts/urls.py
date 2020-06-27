@@ -12,5 +12,8 @@ urlpatterns = [
     path('projects/',views.project_list , name = 'projects_list'),
     path('about/',views.about_list , name = 'about'),
     path('contact/',views.contact, name = 'contact'),
-    path('add_photo/',views.add_gallery, name = 'add_photo'),
+    path('edit/',views.edit, name='edit'),
+    # path('add_photo/',views.add_gallery, name = 'add_photo'),
+    # path('gallery/',views.gallery_list,name = 'gallery'),
+    # path('gallery/<int:year>/<int:month>/<int:day>/<slug:image>/',views.gallery_detail,name='gallery_detail'),
 ]

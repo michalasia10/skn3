@@ -1,0 +1,10 @@
+{% extends 'posts/post_base.html' %}
+{% block gallery %}
+    <div class="col-md-8">
+        <h2>Galeria: </h2>
+    {% for picture in image %}
+        <h2><a href="{{ picture.get_absolute_url }}">{{ picture.title }}</a></h2>
+        <img src="{{ picture.file.url }}" alt="" width="40%" >
+    {% endfor %}
+    </div>
+{% endblock %}
