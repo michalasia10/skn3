@@ -3,7 +3,8 @@ from taggit.managers import TaggableManager
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
-
+from posts.utils import unique_slug_generator
+from django.db.models.signals import pre_save
 
 # Create your models here.
 class PublishManager(models.Manager):
@@ -49,8 +50,19 @@ class Post(models.Model):
             self.publish.strftime('%d'),
             self.slug])
 
+def slug_generator(sender,instance,*args,**kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+pre_save.connect(slug_generator,sender=Post)
+
+
+
+# Gallery doesn't work actually
+
+
 class Gallery(models.Model):
-    title = models.CharField(max_length=256,null=True)
+    title = models.CharField(max_length=256,null=True,blank=True,default='dupa')
     file = models.FileField(upload_to="files/%Y/%m/%d")
     publish = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(unique_for_date='publish', max_length=250)

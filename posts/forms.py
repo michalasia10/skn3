@@ -3,13 +3,15 @@ from django import forms
 from .models import Post,Gallery
 from django import forms
 from django.forms import ClearableFileInput
-class ModelPost:
+class ModelPost(forms.ModelForm):
     class Meta:
         model = Post
         fields = [
             'title',
-            'text',
+            'author',
+            'body',
             'tags',
+            'status',
         ]
 
 class Filles(forms.ModelForm):

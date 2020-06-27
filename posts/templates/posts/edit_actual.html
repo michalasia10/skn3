@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 {% block content %}
-    <h2>New post</h2>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
+    {% if submitted %}
+        <p class="success">
+         Twój post został dodany. Gratulacje.
+       </p>
+    {% else %}
+        <h2>Nowy post</h2>
+        <form method="POST" action="{% url 'posts:edit' %}" class="post-form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    {% endif %}
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Gallery
+from .models import Post,Gallery
 
 
 # Register your models here.
