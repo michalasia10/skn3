@@ -1,1 +1,1 @@
-web: gunicorn --log-file=- skn3.wsgi:application 
+web: gunicorn --pythonpath skn3 wsgi
