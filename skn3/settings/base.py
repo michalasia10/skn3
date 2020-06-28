@@ -101,16 +101,17 @@ WSGI_APPLICATION = 'skn3.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'post',
-        'USER':'post',
-        'PASSWORD': 'michal1',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'post',
+#         'USER':'post',
+#         'PASSWORD': 'michal1',
+#     }
+# }
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES = {}
 DATABASES['default'].update(db_from_env)
 
 # Password validation
@@ -164,6 +165,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '../../media')
 LOGIN_REDIRECT_URL = "/"
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+del DATABASES['default']['OPTIONS']['sslmode']
+
 try:
   from .local import *
 except ImportError:
