@@ -58,7 +58,8 @@ def post_search(request):
         if query is not None:
             lookups = Q(title__icontains=query) | Q(content__icontains=query)
 
-            results = Post.objects.annotate(similarity=TrigramSimilarity('title',query)).filter(similarity__gt=0.025).order_by('-similarity')
+            # results = Post.objects.annotate(similarity=TrigramSimilarity('title',query)).filter(similarity__gt=0.025).order_by('-similarity')
+            results = Post.objects.annotate(rank=TrigramSimilarity('title',query)).filter(rank__gte=0.025).order_by('rank')
 
             context = {'results': results,
                        'submitbutton': submitbutton}
