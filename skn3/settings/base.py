@@ -166,7 +166,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '../../media')
 LOGIN_REDIRECT_URL = "/"
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-del DATABASES['default']['OPTIONS']['sslmode']
+# del DATABASES['default']['OPTIONS']['sslmode']
 
 try:
   from .local import *
