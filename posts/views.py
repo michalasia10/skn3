@@ -59,7 +59,7 @@ def post_home(request):
 
 # edytuj post
 def edit_post(request, year, month, day, post):
-    template = 'posts/edit_actual.html'
+    template = 'posts/new_post.html'
     post = get_object_or_404(Post, slug=post,
                              publish__year=year,
                              publish__month=month,
@@ -145,40 +145,8 @@ def contact(request):
     return render(request, 'posts/contact.html')
 
 
-# def add_gallery(request):
-#     if request.method == 'POST':
-#         # form = ModelPost(request.POST)
-#         form = Filles(request.POST, request.FILES)
-#         files = request.FILES.getlist('file')  # field name in model
-#         if form.is_valid():
-#             feed_instance = form.save(commit=False)
-#             # feed_instance.user = user
-#             feed_instance.save()
-#             for f in files:
-#                 file_instance = Gallery(file=f,)
-#                 file_instance.save()
-#                 return HttpResponseRedirect('/posts')
-#     else:
-#         # form = ModelPost()
-#         form = Filles()
-#     return render(request, 'posts/add_image.html',
-#                   {'form': form,})
-#
-# def gallery_list(request):
-#     image = Gallery.objects.all()
-#     return render(request,'posts/gallery.html',{'image':image})
-#
-# def gallery_detail(request,year,month,day,image):
-#     # images = Gallery.objects.filter()
-#     images = get_object_or_404(Gallery.objects.filter(),
-#                                publish__year=year,
-#                                publish__month=month,
-#                              publish__day=day,
-#                                slug = image,)
-#     return render(request,'posts/gallery_detail.html',{'images': images})
-
 # Nowy post zmien nazwe zmien
-def edit(request):
+def new_post(request):
     submitted = False
     if request.method == 'POST':
         form = ModelPost(request.POST)
@@ -186,13 +154,13 @@ def edit(request):
             cd = form.cleaned_data
             form.save()
             # assert False
-            return HttpResponseRedirect('/posts/edit?submitted=True')
+            return HttpResponseRedirect('/posts/new?submitted=True')
     else:
         form = ModelPost()
         if 'submitted' in request.GET:
             submitted = True
 
     return render(request,
-                  'posts/edit_actual.html',
+                  'posts/new_post.html',
                   {'form': form, 'submitted': submitted}
                   )

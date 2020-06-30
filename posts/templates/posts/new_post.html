@@ -7,7 +7,7 @@
        </p>
     {% else %}
         <h2>Nowy post</h2>
-        <form method="POST" action="{% url 'posts:edit' %}" class="post-form">
+        <form method="POST" action="{% url 'posts:new' %}" class="post-form">
             {% csrf_token %}
             {% bootstrap_form form %}
             <button type="submit" class="save btn btn-default">Save</button>
