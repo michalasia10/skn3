@@ -10,7 +10,7 @@
             {% else %}
                 3 min czytania
             {% endif %} <span class="icon-star2"></span></span>
-    <a href="{% url 'posts:edit_post' %}"><button class="btn btn-warning">Edit</button></a>
+    <a href="{% url 'posts:edit_post' post.publish.year post.publish.month post.publish.day post.slug %}"><button class="btn btn-warning">Edit</button></a>
     </div>
 <p class="mb-3">{{ post.body|markdown }}</p>
     </div>
