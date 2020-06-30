@@ -13,6 +13,7 @@ urlpatterns = [
     path('about/',views.about_list , name = 'about'),
     path('contact/',views.contact, name = 'contact'),
     path('edit/',views.edit, name='edit'),
+    path('edit_post/<int:year>/<int:month>/<int:day>/<slug:post>',views.edit_post ,name = 'edit_post')
     # path('add_photo/',views.add_gallery, name = 'add_photo'),
     # path('gallery/',views.gallery_list,name = 'gallery'),
     # path('gallery/<int:year>/<int:month>/<int:day>/<slug:image>/',views.gallery_detail,name='gallery_detail'),
