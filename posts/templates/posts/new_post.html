@@ -6,11 +6,22 @@
          Twój post został dodany. Gratulacje.
        </p>
     {% else %}
-        <h2>Nowy post</h2>
-        <form method="POST" action="{% url 'posts:new' %}" class="post-form">
+        {% with url_name = request.resolver_match.url_name  %}
+        {% if url_name == 'new' %}
+                <h2>Nowy post</h2>
+            <form method="POST"  class="post-form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button type="submit" class="save btn btn-default">Save</button>
+            </form>
+            {% elif url_name == 'edit_post' %}
+            <h2>Edytuj post</h2>
+        <form method="POST"  class="post-form">
             {% csrf_token %}
             {% bootstrap_form form %}
-            <button type="submit" class="save btn btn-default">Save</button>
+            <button type="submit" class="save btn btn-default">Edit</button>
         </form>
+        {% endif %}
+        {% endwith %}
     {% endif %}
 {% endblock %}

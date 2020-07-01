@@ -81,6 +81,28 @@ def edit_post(request, year, month, day, post):
                'post': post}
     return render(request, template, context)
 
+def delete(request, year, month, day, post):
+    template = 'posts/new_post.html'
+    post = get_object_or_404(Post, slug=post,
+                             publish__year=year,
+                             publish__month=month,
+                             publish__day=day, )
+    if request == 'POST':
+        form = ModelPost(request.POST or None, instance=post)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Post został uaktualniony')
+        except Exception as e:
+            messages.warning(request, 'Post nie został dodany przez błąd: {}'.format(e))
+
+    else:
+        form = ModelPost(instance=post)
+
+    context = {'form': form,
+               'post': post}
+    return render(request, template, context)
 # def updatebc(request, pk):
 #     instance = get_object_or_404(BaseCase, pk=pk)
 #     instance.base_case_name
