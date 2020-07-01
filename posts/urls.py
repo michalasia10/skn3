@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import UpdatePost
+
 # from .views import SearchView
 
 app_name = 'posts'
