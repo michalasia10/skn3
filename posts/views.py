@@ -69,7 +69,7 @@ def edit_post(request, year, month, day, post):
         try:
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('/posts/')
+                return HttpResponseRedirect('/'+year,month,day,post)
         except Exception as e:
             messages.warning(request, 'Post nie został dodany przez błąd: {}'.format(e))
 
