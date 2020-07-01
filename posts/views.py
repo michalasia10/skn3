@@ -59,7 +59,6 @@ def post_home(request):
 
 # edytuj post
 def edit_post(request, year, month, day, post):
-    submit = False
     template = 'posts/edit.html'
     post = get_object_or_404(Post, slug=post,
                              publish__year=year,
@@ -67,23 +66,18 @@ def edit_post(request, year, month, day, post):
                              publish__day=day, )
     if request == 'POST':
         form = ModelPost(request.POST or None, instance=post)
-
         try:
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Post został uaktualniony')
-                return HttpResponseRedirect('/posts/edit_post?submit=True')
+                return HttpResponseRedirect('/posts/')
         except Exception as e:
             messages.warning(request, 'Post nie został dodany przez błąd: {}'.format(e))
 
     else:
         form = ModelPost(instance=post)
-        if 'submit' in request.GET:
-            submit = True
 
     context = {'form': form,
-               'post': post,
-               'submit':submit}
+               'post': post}
     return render(request, template, context)
 
 def delete(request, year, month, day, post):
