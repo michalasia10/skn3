@@ -75,7 +75,7 @@ def edit_post(request, year, month, day, post):
                              publish__year=year,
                              publish__month=month,
                              publish__day=day, )
-    if request == 'POST':
+    if request.method == 'POST':
         form = ModelPost(request.POST or None, instance=post)
         # try:
         if form.is_valid():
