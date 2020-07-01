@@ -69,7 +69,8 @@ def edit_post(request, year, month, day, post):
         # try:
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/'+year,month,day,post)
+            messages.success(request, "Post updated")
+            return HttpResponseRedirect(post.get_absolute_url())
         # except Exception as e:
         #     messages.warning(request, 'Post nie został dodany przez błąd: {}'.format(e))
 
