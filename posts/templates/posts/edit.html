@@ -4,7 +4,7 @@
 
         <div>
             <h2>Edytuj post</h2>
-                <form method="POST" action="{% url 'posts:edit_post' %}" class="post-form">
+                <form method="POST" action="{% url 'posts:edit_post' post.publish.year post.publish.month post.publish.day post.slug  %}" class="post-form">
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     <button type="submit" class="save btn btn-warning">Edycja</button>
