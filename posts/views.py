@@ -9,15 +9,6 @@ from .forms import  ModelPost
 from django.contrib import messages
 from django.views.generic.edit import UpdateView
 
-class UpdatePost(UpdateView):
-    model = Post
-    form_class = ModelPost
-    template_name = 'posts/edit.html'
-    success_url = '/posts/'
-
-
-
-
 
 
 """POST LIST ZWRACA GRUPĘ/LISTE POSTÓW"""
@@ -101,33 +92,11 @@ def delete(request, year, month, day, post):
                              publish__month=month,
                              publish__day=day, )
     if request == 'POST':
-        form = ModelPost(request.POST or None, instance=post)
+        post.delete()
 
-        try:
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Post został uaktualniony')
-        except Exception as e:
-            messages.warning(request, 'Post nie został dodany przez błąd: {}'.format(e))
-
-    else:
-        form = ModelPost(instance=post)
-
-    context = {'form': form,
-               'post': post}
+    context = {'post': post}
     return render(request, template, context)
-# def updatebc(request, pk):
-#     instance = get_object_or_404(BaseCase, pk=pk)
-#     instance.base_case_name
-#     bcform = BaseCaseForm(request.POST or None,instance=instance)
-#     if bcform.is_valid():
-#         instance = bcform.save(commit=False)
-#         instance.save()
-#     context = {
-#         'bcform':bcform,
-#         'instance': instance,
-#     }
-#     return render(request, 'update.html', context)
+
 """Wyszukiwanie postów"""
 
 
