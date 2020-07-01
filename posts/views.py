@@ -66,12 +66,12 @@ def edit_post(request, year, month, day, post):
                              publish__day=day, )
     if request == 'POST':
         form = ModelPost(request.POST or None, instance=post)
-        try:
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/'+year,month,day,post)
-        except Exception as e:
-            messages.warning(request, 'Post nie został dodany przez błąd: {}'.format(e))
+        # try:
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/'+year,month,day,post)
+        # except Exception as e:
+        #     messages.warning(request, 'Post nie został dodany przez błąd: {}'.format(e))
 
     else:
         form = ModelPost(instance=post)
