@@ -69,8 +69,7 @@ def edit_post(request, year, month, day, post):
 
         try:
             if form.is_valid():
-                post = form.save(commit=False)
-                post.save()
+                form.save()
                 messages.success(request, 'Post został uaktualniony')
         except Exception as e:
             messages.warning(request, 'Post nie został dodany przez błąd: {}'.format(e))
