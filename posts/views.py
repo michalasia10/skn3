@@ -65,11 +65,12 @@ def edit_post(request, year, month, day, post):
                              publish__month=month,
                              publish__day=day, )
     if request == 'POST':
-        form = ModelPost(request.POST, instance=post)
+        form = ModelPost(request.POST or None, instance=post)
 
         try:
             if form.is_valid():
-                form.save()
+                post = form.save(commit=False)
+                post.save()
                 messages.success(request, 'Post został uaktualniony')
         except Exception as e:
             messages.warning(request, 'Post nie został dodany przez błąd: {}'.format(e))
@@ -81,7 +82,18 @@ def edit_post(request, year, month, day, post):
                'post': post}
     return render(request, template, context)
 
-
+# def updatebc(request, pk):
+#     instance = get_object_or_404(BaseCase, pk=pk)
+#     instance.base_case_name
+#     bcform = BaseCaseForm(request.POST or None,instance=instance)
+#     if bcform.is_valid():
+#         instance = bcform.save(commit=False)
+#         instance.save()
+#     context = {
+#         'bcform':bcform,
+#         'instance': instance,
+#     }
+#     return render(request, 'update.html', context)
 """Wyszukiwanie postów"""
 
 
