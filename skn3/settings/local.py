@@ -26,3 +26,4 @@ DATABASES = {
         'PASSWORD': 'michal1',
     }
 }
+DATABASE_URL = 'postgres://username:password@localhost:5432/post'

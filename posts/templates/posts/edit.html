@@ -1,17 +1,13 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-{% block content_edit %}
-
-        <div>
-            <h2>Edytuj post</h2>
-                <form method="POST" action="{% url 'posts:edit_post' post.publish.year post.publish.month post.publish.day post.slug  %}" class="post-form">
-                    {% csrf_token %}
-                    {% bootstrap_form form %}
-                    <button type="submit" class="save btn btn-warning">Edycja</button>
-                    <input type="submit" value="Update">
-                    {{ form.as_p }}
-                    <button type="submit" class="save btn btn-warning">Edycja</button>
-                </form>
-        </div>
+{% block content %}
+    <div>
+        <h2>Edytuj post</h2>
+        <form method="POST" action="{% url 'posts:edit_post' post.publish.year post.publish.month post.publish.day post.slug  %}" class="post-form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="save btn btn-warning">Edycja</button>
+        </form>
+    </div>
 
 {% endblock %}
