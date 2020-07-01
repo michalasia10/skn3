@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block content_edit %}
-    {% if submit %}
-        <p class="success">
-         Twój post został edytowany. Gratulacje.
-       </p>
-    {% else %}
+
         <div>
             <h2>Edytuj post</h2>
                 <form method="POST" action="{% url 'posts:edit_post' post.publish.year post.publish.month post.publish.day post.slug %}" class="post-form">
@@ -14,6 +10,5 @@
                     <button type="submit" class="save btn btn-warning">Edycja</button>
                 </form>
         </div>
-    {% endif %}
 
 {% endblock %}
