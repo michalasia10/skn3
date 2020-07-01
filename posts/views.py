@@ -7,6 +7,17 @@ from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Q
 from .forms import  ModelPost
 from django.contrib import messages
+from django.views.generic.edit import UpdateView
+
+class UpdatePost(UpdateView):
+    model = Post
+    form_class = ModelPost
+    template_name = 'posts/edit.html'
+    success_url = '/posts/'
+
+
+
+
 
 
 """POST LIST ZWRACA GRUPĘ/LISTE POSTÓW"""
@@ -80,6 +91,8 @@ def edit_post(request, year, month, day, post):
     context = {'form': form,
                'post': post}
     return render(request, template, context)
+
+
 
 def delete(request, year, month, day, post):
     template = 'posts/new_post.html'
