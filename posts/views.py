@@ -91,7 +91,7 @@ def delete(request, year, month, day, post):
                              publish__year=year,
                              publish__month=month,
                              publish__day=day, )
-    if request == 'POST':
+    if request.method == 'POST':
         post.delete()
         return HttpResponseRedirect('home')
 
