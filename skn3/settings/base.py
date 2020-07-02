@@ -172,7 +172,6 @@ LOGIN_REDIRECT_URL = "/"
 # del DATABASES['default']['OPTIONS']['sslmode']
 
 
-
 try:
   from .local import *
 except ImportError:
