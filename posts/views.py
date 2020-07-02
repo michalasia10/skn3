@@ -86,7 +86,7 @@ def edit_post(request, year, month, day, post):
 
 
 def delete(request, year, month, day, post):
-    template = 'posts/edit.html'
+    template = 'posts/delete.html'
     post = get_object_or_404(Post, slug=post,
                              publish__year=year,
                              publish__month=month,
