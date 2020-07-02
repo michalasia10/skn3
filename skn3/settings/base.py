@@ -176,7 +176,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-ADMIN_MEDIA_PREFIX = '../static/admin/'
+ADMIN_MEDIA_PREFIX = '../django/contrib/admin/static/admin/'
 # del DATABASES['default']['OPTIONS']['sslmode']
 
 
