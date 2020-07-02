@@ -107,7 +107,8 @@
 {#                    <a href="{% url 'posts:gallery' %}" class="nav-link text-left">Galeria</a>#}
 {#                </li>#}
                 <li><a href="{% url 'posts:contact' %}" class="nav-link text-left">Kontakt</a></li>
-                  {% if user.is_authenticated %}
+{#                  {% if user.is_authenticated %}#}
+                  {% if perms.posts.can_add_post %}
                 <li>
                     <a href="{% url 'accounts:logout' %}" class="nav-link text-left">Wyloguj</a>
                 </li>
