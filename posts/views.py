@@ -8,7 +8,7 @@ from django.db.models import Q
 from .forms import  ModelPost
 from django.contrib import messages
 from django.views.generic.edit import UpdateView
-
+from django.contrib.auth.decorators import login_required
 
 
 """POST LIST ZWRACA GRUPĘ/LISTE POSTÓW"""
@@ -59,7 +59,7 @@ def post_home(request):
     return render(request, 'posts/actual.html', {'posts': posts})
 
 
-# edytuj post
+@login_required
 def edit_post(request, year, month, day, post):
     template = 'posts/edit.html'
     post = get_object_or_404(Post, slug=post,
@@ -84,7 +84,7 @@ def edit_post(request, year, month, day, post):
     return render(request, template, context)
 
 
-
+@login_required
 def delete(request, year, month, day, post):
     template = 'posts/delete.html'
     post = get_object_or_404(Post, slug=post,
@@ -161,7 +161,7 @@ def contact(request):
     return render(request, 'posts/contact.html')
 
 
-# Nowy post zmien nazwe zmien
+@login_required
 def new_post(request):
     submitted = False
     if request.method == 'POST':
