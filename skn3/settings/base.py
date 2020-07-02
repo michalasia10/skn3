@@ -158,7 +158,7 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, '../skn3/static'),
 )
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -171,9 +171,7 @@ LOGIN_REDIRECT_URL = "/"
 
 # del DATABASES['default']['OPTIONS']['sslmode']
 
-import mimetypes
-mimetypes.add_type("text/css",".css",True)
-
+]
 
 try:
   from .local import *
