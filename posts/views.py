@@ -84,7 +84,7 @@ def edit_post(request, year, month, day, post):
     return render(request, template, context)
 
 
-@login_required
+@permission_required('posts.can_delete_post')
 def delete(request, year, month, day, post):
     template = 'posts/delete.html'
     post = get_object_or_404(Post, slug=post,
@@ -161,7 +161,7 @@ def contact(request):
     return render(request, 'posts/contact.html')
 
 
-@login_required
+@permission_required('posts.can_add_post')
 def new_post(request):
     submitted = False
     if request.method == 'POST':
