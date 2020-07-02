@@ -169,7 +169,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '../../media')
 LOGIN_REDIRECT_URL = "/"
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 # del DATABASES['default']['OPTIONS']['sslmode']
 
 
