@@ -6,7 +6,7 @@
             {% csrf_token %}
             <h2>Chcesz usunąć post: ,,{{ post.title }}'' ?</h2>
             <button type="submit" class="save btn btn-danger">Tak</button>
-            <a href="{% url 'home' %}"><button  class="btn btn-info">Anuluj</button></a>
         </form>
+        <a href="{% url 'home' %}"><button  class="btn btn-info">Anuluj</button></a>
     </div>
 {% endblock %}
