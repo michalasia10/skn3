@@ -8,4 +8,6 @@
             </p></div>
         </div>
     {% endfor %}
+    <a href="{% url 'posts:edit_post' post.publish.year post.publish.month post.publish.day post.slug %}"><button class="btn btn-warning">Edit</button></a>
+    <a href="{% url 'posts:delete' post.publish.year post.publish.month post.publish.day post.slug %}"><button class="btn btn-danger">Usuń</button></a>
 {% endblock %}
