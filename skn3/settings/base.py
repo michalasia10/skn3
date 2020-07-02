@@ -171,6 +171,10 @@ LOGIN_REDIRECT_URL = "/"
 
 # del DATABASES['default']['OPTIONS']['sslmode']
 
+import mimetypes
+mimetypes.add_type("text/css",".css",True)
+
+
 try:
   from .local import *
 except ImportError:
