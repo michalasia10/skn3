@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-    <div>
+    <div class="form-inline">
         <form method="POST"  class="form-inline">
             {% csrf_token %}
             <h2>Chcesz usunąć post: ,,{{ post.title }}'' ?</h2>
             <button type="submit" class="save btn btn-danger">Tak</button>
         </form>
-        <a href="{% url 'home' %}"><button  class="btn btn-info">Anuluj</button></a>
+        <a href="{% url 'home' %}"><button  class=" btn btn-info">Anuluj</button></a>
     </div>
 {% endblock %}
