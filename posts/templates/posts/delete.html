@@ -4,9 +4,9 @@
     <div>
         <form method="POST"  class="form-inline">
             {% csrf_token %}
-            <h1>Chcesz usunąć post?{{ post.title }}</h1>
+            <h2>Chcesz usunąć post: ,,{{ post.title }}'' ?</h2>
             <button type="submit" class="save btn btn-danger">Tak</button>
-            <a href="{% url 'home' %}"><button type="submit">Anuluj</button></a>
+            <a href="{% url 'home' %}"><button type="submit" class="btn btn-info">Anuluj</button></a>
         </form>
     </div>
 {% endblock %}

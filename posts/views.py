@@ -93,6 +93,7 @@ def delete(request, year, month, day, post):
                              publish__day=day, )
     if request == 'POST':
         post.delete()
+        return HttpResponseRedirect('home')
 
     context = {'post': post}
     return render(request, template, context)
